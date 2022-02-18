@@ -1,0 +1,22 @@
+ls
+clear
+afetch
+clear
+pfetch
+clear
+afetch
+htop
+clear
+afetch
+cd .scripts/
+ls
+vim lock.sh 
+clear
+afetch
+afetch
+ls
+clear
+cd .scripts/
+ls
+clear
+exit
