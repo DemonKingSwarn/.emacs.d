@@ -46,3 +46,6 @@ clear
 pfetch
 clear
 afetch
+git add .
+git commit -m "something"
+git push

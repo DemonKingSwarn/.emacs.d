@@ -72,7 +72,7 @@
 (use-package doom-themes
   :ensure t
   :config
-  (load-theme 'doom-dark+ t))
+  (load-theme 'doom-palenight t))
 
 (use-package which-key
   :init (which-key-mode)
@@ -103,7 +103,25 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key)
 
-(use-package org)
+  (use-package org
+    :hook (org-mode . efs/org-mode-setup)
+    :config
+    (setq org-ellipsis " ▾")
+    (efs/org-font-setup))
+
+  (use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+  (defun efs/org-mode-visual-fill ()
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+  (use-package visual-fill-column
+  :hook (org-mode . efs/org-mode-visual-fill))
   
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
