@@ -1,0 +1,51 @@
+ls
+clear
+afetch
+clear
+pfetch
+clear
+afetch
+htop
+clear
+afetch
+cd .scripts/
+ls
+vim lock.sh 
+clear
+afetch
+afetch
+ls
+clear
+cd .scripts/
+ls
+clear
+exit
+cd dox
+mkdir notes
+cd notes
+ls
+ls -a
+clear
+afetch
+clear
+neofetch
+clear
+fufetch
+clear
+cd
+clear
+afetch
+clear
+pfetch
+clear
+neofetch
+clear
+htop
+cd
+clear
+pfetch
+clear
+afetch
+git add .
+git commit -m "something"
+git push
