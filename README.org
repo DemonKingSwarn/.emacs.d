@@ -1,3 +1,5 @@
 * .emacs.d
 
 ** Config file for my emacs
+
+  These are soon be organized! :)
