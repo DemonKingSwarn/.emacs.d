@@ -7,14 +7,14 @@
 ;; The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 50 1000 1000))
 
-(defun efs/display-startup-time ()
-  (message "Emacs loaded in %s with %d garbage collections."
-           (format "%.2f seconds"
-                   (float-time
-                     (time-subtract after-init-time before-init-time)))
-           gcs-done))
+;; (defun efs/display-startup-time ()
+;;  (message "Emacs loaded in %s with %d garbage collections."
+;;           (format "%.2f seconds"
+;;                   (float-time
+;;                     (time-subtract after-init-time before-init-time)))
+;;           gcs-done))
 
-(add-hook 'emacs-startup-hook #'efs/display-startup-time)
+;; (add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
 ;; Initialize package sources
 (require 'package)
@@ -83,13 +83,13 @@
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-(set-face-attribute 'default nil :font "Monocraft" :height efs/default-font-size)
+(set-face-attribute 'default nil :font "JetBrains Mono" :height efs/default-font-size)
 
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Monocraft" :height efs/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height efs/default-font-size)
 
 ;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Monocraft" :height efs/default-variable-font-size :weight 'regular)
+(set-face-attribute 'variable-pitch nil :font "JetBrains Mono" :height efs/default-variable-font-size :weight 'regular)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -609,6 +609,12 @@
   (evil-collection-define-key 'normal 'dired-mode-map
     "H" 'dired-hide-dotfiles-mode))
 
+(require 'ccls)
+(setq ccls-executable "/usr/bin/ccls")
+
+(require 'lsp-java)
+(add-hook 'java-mode-hook #'lsp)
+
 (use-package dashboard
   :ensure t
   :config
@@ -628,7 +634,7 @@
  '(custom-safe-themes
    '("944d52450c57b7cbba08f9b3d08095eb7a5541b0ecfb3a0a9ecd4a18f3c28948" default))
  '(package-selected-packages
-   '(dired-hide-dotfiles dired-open all-the-icons-dired dired-single eshell-git-prompt vterm eterm-256color rainbow-delimiters evil-nerd-commenter forge magit counsel-projectile projectile company-box company pyvenv python-mode typescript-mode dap-mode lsp-ivy lsp-treemacs lsp-ui lsp-mode visual-fill-column org-bullets hydra helpful ivy-prescient counsel ivy-rich ivy which-key doom-modeline all-the-icons doom-themes command-log-mode evil-collection evil general no-littering auto-package-update use-package)))
+   '(lsp-java lsp-javacomp dired-hide-dotfiles dired-open all-the-icons-dired dired-single eshell-git-prompt vterm eterm-256color rainbow-delimiters evil-nerd-commenter forge magit counsel-projectile projectile company-box company pyvenv python-mode typescript-mode dap-mode lsp-ivy lsp-treemacs lsp-ui lsp-mode visual-fill-column org-bullets hydra helpful ivy-prescient counsel ivy-rich ivy which-key doom-modeline all-the-icons doom-themes command-log-mode evil-collection evil general no-littering auto-package-update use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
