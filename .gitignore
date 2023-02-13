@@ -2,3 +2,5 @@ elpa/
 etc/
 var/
 .last-package-update-day
+eln-cache/
+transient/
