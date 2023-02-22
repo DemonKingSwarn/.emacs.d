@@ -34,18 +34,20 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(use-package auto-package-update
-  :custom
-  (auto-package-update-interval 7)
-  (auto-package-update-prompt-before-update t)
-  (auto-package-update-hide-results t)
-  :config
-  (auto-package-update-maybe)
-  (auto-package-update-at-time "09:00"))
+;;(use-package auto-package-update
+;;  :custom
+;;  (auto-package-update-interval 7)
+;;  (auto-package-update-prompt-before-update t)
+;;  (auto-package-update-hide-results t)
+;;  :config
+;;  (auto-package-update-maybe)
+;;  (auto-package-update-at-time "09:00"))
 
 ;; NOTE: If you want to move everything out of the ~/.emacs.d folder
 ;; reliably, set `user-emacs-directory` before loading no-littering!
 ;(setq user-emacs-directory "~/.cache/emacs")
+
+(setq confirm-kill-emacs nil)
 
 (use-package no-littering)
 
