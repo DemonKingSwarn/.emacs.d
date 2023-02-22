@@ -1,3 +1,10 @@
+#+TITLE: D-EMACS
+#+AUTHOR: DemonKingSwarn
+#+PROPERTY: header-args :mkdirp yes :tangle /home/demonkingswarn/.emacs.d/init.el
+
+* Config File
+
+#+begin_src elisp :tangle ~/.emacs.d/init.el 
 (defvar efs/default-font-size 180)
 (defvar efs/default-variable-font-size 180)
 
@@ -621,3 +628,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+#+end_src
