@@ -432,6 +432,8 @@
   (use-package lsp-ivy
     :after lsp)
 
+  (use-package eglot)
+
   (use-package dap-mode
     ;; Uncomment the config below if you want all UI panes to be hidden by default!
     ;; :custom
@@ -645,13 +647,16 @@
   :custom
   (lsp-keymap-prefix "C-c l"))
 
-(use-package csharp-mode
-  :ensure t
-  :init
-  (defun my/csharp-mode-hook ()
-    (setq-local lsp-auto-guess-root t)
-    (lsp))
-  (add-hook 'csharp-mode-hook #'my/csharp-mode-hook))
+
+  (package-install 'omnisharp)
+
+(add-hook 'csharp-mode-hook 'omnisharp-mode)
+
+(eval-after-load
+ 'company
+ '(add-to-list 'company-backends 'company-omnisharp))
+
+(add-hook 'csharp-mode-hook #'company-mode)
 
   (straight-use-package
  '(unity :type git :host github :repo "elizagamedev/unity.el"))
