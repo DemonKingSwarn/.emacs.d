@@ -25,6 +25,15 @@
 (straight-use-package 'use-package)
 (require 'use-package)
 
+(use-package visual-fill-column
+  :hook (org-mode . efs/org-mode-visual-fill))
+
+(defun efs/org-mode-visual-fill ()
+  (setq visual-fill-column-width 120
+        visual-fill-column-center-text t)
+
+  (visual-fill-column-mode 1))
+
 ;;; Vars
 (defvar efs/default-font-size 180)
 (defvar efs/default-variable-font-size 180)
@@ -263,6 +272,9 @@
   ("f" nil "finished" :exit t))
 
 ;;; Org
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode))
+
 (defun efs/org-font-setup ()
   (font-lock-add-keywords
    'org-mode
@@ -426,7 +438,7 @@
 
 ;;; Completion
 (use-package company
-
+  :hook (prog-mode . company-mode)
   :bind
   (:map company-active-map
         ("<tab>" . company-complete-selection))
@@ -654,9 +666,10 @@
 ;;; GC restore
 (setq gc-cons-threshold (* 2 1000 1000))
 
-;;; Jai mode
+;;; Custom modes
 (add-to-list
  'load-path
  "~/.config/emacs/modes/")
 
 (require 'jai-mode)
+(require 'odin-mode)
