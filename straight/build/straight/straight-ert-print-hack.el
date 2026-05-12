@@ -1,1 +1,1 @@
-/home/demonkingswarn/.emacs.d/straight/repos/straight.el/straight-ert-print-hack.el
+/home/swarn/.config/emacs/straight/repos/straight.el/straight-ert-print-hack.el

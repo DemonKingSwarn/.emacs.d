@@ -1,1 +1,1 @@
-/home/demonkingswarn/.emacs.d/straight/repos/straight.el/straight-x.el
+/home/swarn/.config/emacs/straight/repos/straight.el/straight-x.el

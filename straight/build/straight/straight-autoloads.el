@@ -38,7 +38,20 @@ Optional arg FILTER must be a unary function.
 It takes a package name as its sole argument.
 If it returns nil the candidate is excluded.
 
-(fn &optional SOURCES ACTION FILTER)" t)
+USE-CACHE non-nil means respect the existing straight.el recipe cache,
+i.e. display also packages that have been registered in the current
+Emacs session even if not found in any recipe repository, and if such a
+package is selected, return just the package name as a symbol, instead
+of a recipe. (It is not possible to return an actual recipe, as the API
+for `straight-get-recipe' returns MELPA-style recipes, while cached
+recipes have already been converted into the internal format.)
+
+Within `straight-get-recipe', the symbol `cache' is treated as if it is
+also a member of `straight-recipe-repositories', and refers to the set
+of packages that have already been registered in the current Emacs
+session.
+
+(fn &optional SOURCES ACTION FILTER USE-CACHE)" t)
 (autoload 'straight-visit-package-website "straight" "\
 Visit the package RECIPE's website.
 
@@ -84,6 +97,14 @@ hint about how to install the package permanently.
 
 Return non-nil when package is initially installed, nil otherwise.
 
+Interactively, prompt with a list of available packages in currently
+registered recipe repositories. With prefix arg, prompt first for which
+recipe repository to list from. If a package has already been registered
+in the current Emacs session, the existing recipe is re-used rather than
+being looked up anew. With prefix arg, \"cache\" is displayed as one of
+the recipe repositories, and allows filtering to only already-registered
+packages.
+
 (fn MELPA-STYLE-RECIPE &optional NO-CLONE NO-BUILD CAUSE INTERACTIVE)" t)
 (autoload 'straight-register-package "straight" "\
 Register a package without cloning, building, or activating it.
@@ -107,7 +128,9 @@ This function is equivalent to calling `straight-use-package'
 with symbol `lazy' for NO-CLONE. It is provided for convenience.
 MELPA-STYLE-RECIPE is as for `straight-use-package'.
 
-(fn MELPA-STYLE-RECIPE)")
+Argument CAUSE is for internal use only.
+
+(fn MELPA-STYLE-RECIPE &optional CAUSE)")
 (autoload 'straight-use-recipes "straight" "\
 Register a recipe repository using MELPA-STYLE-RECIPE.
 This registers the recipe and builds it if it is already cloned.
@@ -118,7 +141,14 @@ inhibit the build phase.
 This function also adds the recipe repository to
 `straight-recipe-repositories', at the end of the list.
 
-(fn MELPA-STYLE-RECIPE)")
+Existing recipe repositories are not searched for a recipe for the
+recipe repository you are trying to register, because that is strange
+and confusing. If you explicitly want this behavior, you can use the
+`straight-use-package' API directly.
+
+Argument CAUSE is for internal use only.
+
+(fn MELPA-STYLE-RECIPE &optional CAUSE)")
 (autoload 'straight-override-recipe "straight" "\
 Register MELPA-STYLE-RECIPE as a recipe override.
 This puts it in `straight-recipe-overrides', depending on the
@@ -172,7 +202,10 @@ PACKAGE is a string naming a package. Interactively, select
 PACKAGE from the known packages in the current Emacs session
 using `completing-read'.
 
-(fn PACKAGE)" t)
+CONVERT-SNAPSHOTS non-nil (interactively, prefix arg) means if the
+repository is a snapshot, convert it to a full repository first.
+
+(fn PACKAGE &key CONVERT-SNAPSHOTS)" t)
 (autoload 'straight-normalize-all "straight" "\
 Normalize all packages. See `straight-normalize-package'.
 Return a list of recipes for packages that were not successfully
@@ -183,7 +216,10 @@ PREDICATE, if provided, filters the packages that are normalized.
 It is called with the package name as a string, and should return
 non-nil if the package should actually be normalized.
 
-(fn &optional PREDICATE)" t)
+CONVERT-SNAPSHOTS non-nil (interactively, prefix arg) means if
+repositories are snapshots, convert them to full repositories first.
+
+(fn &optional PREDICATE CONVERT-SNAPSHOTS)" t)
 (autoload 'straight-fetch-package "straight" "\
 Try to fetch a PACKAGE from the primary remote.
 PACKAGE is a string naming a package. Interactively, select
@@ -370,11 +406,25 @@ locally bound plist, straight-bug-report-args.
 (fn &rest ARGS)" nil t)
 (function-put 'straight-bug-report 'lisp-indent-function 0)
 (autoload 'straight-dependencies "straight" "\
-Return a list of PACKAGE's dependencies.
+Return a list of PACKAGE's dependencies, as strings.
+PACKAGE is a string. If the dependencies have dependencies themselves,
+then instead of strings they will be lists whose cars are the
+dependencies and whose cdrs are the recursive dependencies in the same
+format returned from `straight-dependencies'.
+
+Interactively, the user selects a package to show dependencies for, and
+the dependencies are shown in the echo area.
 
 (fn &optional PACKAGE)" t)
 (autoload 'straight-dependents "straight" "\
-Return a list PACKAGE's dependents.
+Return a list of PACKAGE's dependents, as strings.
+Dependents are packages that have the given package as a dependency. In
+other words, this is the opposite of `straight-dependencies'.
+
+PACKAGE is a string. If the dependents have dependents themselves, then
+instead of strings they will be lists whose cars are the dependents and
+whose cdrs are the recursive dependents in the same format returned from
+`straight-dependents'.
 
 (fn &optional PACKAGE)" t)
 (register-definition-prefixes "straight" '("straight-"))

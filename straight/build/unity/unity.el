@@ -1,1 +1,1 @@
-/home/demonkingswarn/.emacs.d/straight/repos/unity.el/unity.el
+/home/swarn/.config/emacs/straight/repos/unity.el/unity.el

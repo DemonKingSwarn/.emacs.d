@@ -1,6 +1,8 @@
-elpa/
-etc/
-var/
-.last-package-update-day
 eln-cache/
-transient/
+elpa/
+auto-save-list/
+straight/
+etc/
+
+init.el~
+configuration.el
