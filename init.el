@@ -25,3 +25,4 @@
 (setq straight-use-package-by-default t)(require 'use-package)
 
 (org-babel-load-file (concat user-emacs-directory "configuration.org"))
+(put 'dired-find-alternate-file 'disabled nil)
