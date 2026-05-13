@@ -3,7 +3,9 @@
 #+EMAIL: swarnadityasingh@pm.me
 #+OPTIONS: toc:nil num:nil
 
-This is my new Emacs configuration
+Yeah, I finally got time to fix my emacs configuration. Also this one now stays in the =$XDG_CONFIG_HOME/emacs= instead of =$HOME/.emacs.d=, it's so much better now that it doesn't clutter my home directory. Also one important thing, my emacs config no longer supports windows.
+
+[[file:./.assets/emacs.png][screenshot showing my emacs]]
 
 ** Installation
 
