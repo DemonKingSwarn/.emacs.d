@@ -90,6 +90,14 @@ I used to be the JetBrains Mono user, but LythMono is awesome :D
 
 #+end_src
 
+** Setting the absolute important thing
+
+no way in hell i am gonna use spaces for indentation
+
+#+begin_src emacs-lisp :tangle yes
+(setq-default tab-width 4)
+#+end_src
+
 ** Keybinds
 
 #+begin_src emacs-lisp :tangle yes
@@ -184,7 +192,7 @@ I like my editor to be a bit evil
 #+begin_src emacs-lisp :tangle yes
   (use-package catppuccin-theme
     :config
-    (load-theme 'doom-tokyo-night t))
+    (load-theme 'doom-dracula t))
 
   (use-package doom-modeline
     :init
@@ -614,6 +622,8 @@ I like my editor to be a bit evil
       :config
       (setq dired-open-extensions
             '(("png" . "nsxiv")
+              ("jpg" . "nsxiv")
+  		  ("pdf" . "zathura")
               ("mkv" . "mpv"))))
 
     (use-package dired-hide-dotfiles
