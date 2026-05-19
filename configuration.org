@@ -192,7 +192,7 @@ I like my editor to be a bit evil
 #+begin_src emacs-lisp :tangle yes
   (use-package catppuccin-theme
     :config
-    (load-theme 'doom-dracula t))
+    (load-theme 'catppuccin t))
 
   (use-package doom-modeline
     :init
